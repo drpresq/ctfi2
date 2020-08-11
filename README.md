@@ -58,7 +58,8 @@ ctfi2
 
 (Optional) Run it without installation:
 ```
-./ctfi2/src/ctfi2.py
+chmod +x ./ctfi2/scripts/ctfi2
+./ctfi2/scripts/ctfi2
 ```
 
 

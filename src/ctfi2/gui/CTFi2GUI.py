@@ -38,7 +38,6 @@ class CTFi2GUI(QWidget):
         self.competition_menu = QMenu()
         self.competition_menu.addAction("Rename Competition").triggered.connect(self.edit_competition)
         self.competition_menu.addAction("Remove Competition").triggered.connect(self.remove_competition)
-        self.competition_menu.addAction("Export Competition").triggered.connect(self.export_competition)
 
         self.challenge_root_context_menu = QMenu()
         self.challenge_root_context_menu.addAction("Add Challenge").triggered.connect(self.add_challenge)
@@ -244,10 +243,11 @@ class CTFi2GUI(QWidget):
         self.log("New Competition Action Called.")
         configuration_name, success = QInputDialog.getText(self, "Create New Competition", "Enter Competition Name:")
 
-        self.new_server_dialog = ServerWidget()
-        self.new_server_dialog.name_line.setText(configuration_name)
-        self.new_server_dialog.exec_()
-        new_server = self.new_server_dialog.read() if success else None
+        if success:
+            self.new_server_dialog = ServerWidget()
+            self.new_server_dialog.name_line.setText(configuration_name)
+            self.new_server_dialog.exec_()
+            new_server = self.new_server_dialog.read() if success else None
 
         if success and new_server['url_prefix'] != '':
             self.competition_config_dict[configuration_name] = Configuration()
