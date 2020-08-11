@@ -3,7 +3,7 @@ from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 
-from gui.components import ComponentFactory
+from ctfi2.gui.components import ComponentFactory
 
 COUNTRIES_LIST = [
     ("", ""),

@@ -5,10 +5,10 @@ from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 
-from api.constants import VERSION
+from ctfi2.api.constants import VERSION
 
 # Import Plugins
-from gui import CTFi2GUI
+from ctfi2.gui import CTFi2GUI
 
 # Handle high resolution displays:
 if hasattr(Qt, 'AA_EnableHighDpiScaling'):

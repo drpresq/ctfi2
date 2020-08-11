@@ -5,12 +5,13 @@ with open("README.md", "r") as fh:
 
 setup(
     name='ctfi2',
-    version="0.1",
-    package_dir={"src"},
-    packages=["*"],
+    version="1.0",
+    package_dir={'':"src"},
+    packages=["ctfi2"],
+    scripts=['src/ctfi2/ctfi2'],
     author="George Wood",
     author_email="drpresq@gmail.com",
-    description="ctfi2 - CTFd Command Line Interface 2",
+    description="ctfi2 - CTFd Interface 2",
     long_description=long_desc,
     long_description_content_type="text/markdown",
     url="https//github.com/drpresq/ctfi2",

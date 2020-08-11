@@ -2,7 +2,7 @@ from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 
-from api.constants import TITLE, VERSION, AUTHOR
+from ctfi2.api.constants import TITLE, VERSION, AUTHOR
 
 
 class TitleWidget(QWidget):

@@ -1,8 +1,6 @@
 import os
-from requests.exceptions import BaseHTTPError as RequestErr
-from requests.exceptions import ConnectionError
 
-from api import API, dat, FILE_PATH, check_fields
+from ctfi2.api import API, dat, FILE_PATH, check_fields
 
 
 class Configuration:

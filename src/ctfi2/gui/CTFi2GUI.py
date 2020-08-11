@@ -7,10 +7,10 @@ import string
 from PyQt5.QtWidgets import *
 from re import match
 
-from api import FILE_PATH, pattern_email
-from gui.components import TitleWidget, CompetitionTree, FileWidget, UserWidget, \
+from ctfi2.api import FILE_PATH, pattern_email
+from ctfi2.gui.components import TitleWidget, CompetitionTree, FileWidget, UserWidget, \
     FlagWidget, HintWidget, UserImportWidget, ChallengeWidget, ServerWidget
-from configuration import Configuration
+from ctfi2.configuration import Configuration
 
 
 class CTFi2GUI(QWidget):

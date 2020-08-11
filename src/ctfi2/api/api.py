@@ -1,11 +1,10 @@
 import os
-from re import match
 from requests import Session, Response
 from requests.exceptions import BaseHTTPError as RequestErr
 from json import dumps
 from csv import DictReader
 
-from api.constants import err_msg, dat, check_fields, check_response, pattern_hash, check_output_types
+from ctfi2.api.constants import err_msg, dat, check_fields, check_response, check_output_types
 
 
 class API(Session):

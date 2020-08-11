@@ -3,8 +3,7 @@
 import logging
 import argparse
 
-import gui
-
+from ctfi2 import gui
 
 if __name__ == '__main__':
     log_level = logging.DEBUG
