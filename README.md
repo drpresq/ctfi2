@@ -22,6 +22,7 @@ Key Features:
     - Initial Release
 
 - TODO:
+    - Documentation
     - Reduce the volume of tastey spaghetti!
     - Inuitive, msfconsole-esq, Command Line Mode
     - Import/Export of configuration data
