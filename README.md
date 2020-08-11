@@ -2,7 +2,7 @@
 ## Table of Contents
 - [CTFd Command Line Interface 2 (ctfcli2)](#CTFd-Command-Line-Interface-2-ctfcli2)
     - [Description](#description)
-    - [Change Log](#change log)
+    - [Change Log](#change-log)
     - [Limitations](#limitations)
     - [Installation](#installation)
         - [Requirements](#requirements)
