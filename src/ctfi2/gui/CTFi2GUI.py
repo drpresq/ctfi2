@@ -67,7 +67,7 @@ class CTFi2GUI(QWidget):
         if os.path.exists(FILE_PATH):
             self.load_configurations()
         else:
-            os.mkdir(self.file_path)
+            os.mkdir(FILE_PATH)
 
         # Property Widgets for Stacked Viewing
 

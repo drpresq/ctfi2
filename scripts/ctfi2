@@ -3,7 +3,7 @@
 import logging
 import argparse
 
-from ctfi2 import gui
+from ctfi2.gui.gui import run
 
 if __name__ == '__main__':
     log_level = logging.DEBUG
@@ -21,7 +21,7 @@ if __name__ == '__main__':
         pass
 
     elif args.G:
-        gui.run(log_level)
+        run(log_level)
 
     else:
         parser.print_help()

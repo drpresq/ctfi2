@@ -2,7 +2,7 @@ from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 
-from ctfi2.gui.components import ComponentFactory
+from ctfi2.gui.components.componentfactory import ComponentFactory
 
 
 class FlagWidget(QDialog):

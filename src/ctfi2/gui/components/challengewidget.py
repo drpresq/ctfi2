@@ -2,7 +2,8 @@ from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 
-from ctfi2.gui.components import ComponentFactory, RequirementWidget
+from ctfi2.gui.components.componentfactory import ComponentFactory
+from ctfi2.gui.components.requirementwidget import RequirementWidget
 
 
 class ChallengeWidget(QDialog):

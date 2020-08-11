@@ -1,4 +1,4 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 
 with open("README.md", "r") as fh:
     long_desc = fh.read()
@@ -6,15 +6,15 @@ with open("README.md", "r") as fh:
 setup(
     name='ctfi2',
     version="1.0",
-    package_dir={'':"src"},
-    packages=["ctfi2"],
-    scripts=['src/ctfi2/ctfi2'],
-    author="George Wood",
+    packages=["ctfi2", "ctfi2.api", "ctfi2.gui", "ctfi2.gui.components", "ctfi2.cli"],
+    package_dir={'': "src"},
+    scripts=['scripts/ctfi2'],
+    author="George",
     author_email="drpresq@gmail.com",
     description="ctfi2 - CTFd Interface 2",
     long_description=long_desc,
     long_description_content_type="text/markdown",
-    url="https//github.com/drpresq/ctfi2",
+    url="https://github.com/drpresq/ctfi2",
     keywords="",
     classifiers=[
         'Intended Audience :: Science/Research',

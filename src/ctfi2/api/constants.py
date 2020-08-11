@@ -1,3 +1,4 @@
+import os
 from re import match
 from functools import wraps
 from requests import Response
@@ -10,9 +11,7 @@ VERSION = '1.0 (Acceptable Axolotl)'
 pattern_email = r"[a-zA-Z0-9_-]*@[a-zA-Z0-9]*\.[a-zA-Z]{2,3}"
 pattern_hash = r'.*,(\"\$bcrypt.*\"),.*'
 
-FILE_PATH = "src/main/python/utils/ctfi/configurations/"
-
-FILE_PATH = "/home/user/dev/res/{}".format(FILE_PATH)
+FILE_PATH = os.path.join(os.path.expanduser("~"), ".ctfi2")
 
 err_msg = "API Error:\n\tMethod: {}\n\tData: {}"
 
