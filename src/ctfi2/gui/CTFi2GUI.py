@@ -39,6 +39,10 @@ class CTFi2GUI(QWidget):
         self.competition_menu.addAction("Rename Competition").triggered.connect(self.edit_competition)
         self.competition_menu.addAction("Remove Competition").triggered.connect(self.remove_competition)
 
+        self.server_context_menu = QMenu()
+        self.server_context_menu.addAction("Reset Server").triggered.connect(self.server_reset)
+        self.server_context_menu.addAction("Wipe Server").triggered.connect(self.server_wipe)
+
         self.challenge_root_context_menu = QMenu()
         self.challenge_root_context_menu.addAction("Add Challenge").triggered.connect(self.add_challenge)
         self.challenge_root_context_menu.addAction("Sync Challenges").triggered.connect(self.challenge_sync)
@@ -212,7 +216,8 @@ class CTFi2GUI(QWidget):
     def show_context_menu(self, position):
         self.log("show_context_menu called.")
         context = self.competition_tree.itemAt(position) if position else self.competition_tree.topLevelItem(0)
-        menus: dict = {'challenges': self.challenge_root_context_menu,
+        menus: dict = {'server': self.server_context_menu,
+                       'challenges': self.challenge_root_context_menu,
                        'challenges_node': self.challenge_node_context_menu,
                        'flags_node': self.node_context_menu,
                        'hints_node': self.node_context_menu,
@@ -251,7 +256,21 @@ class CTFi2GUI(QWidget):
 
         if success and new_server:
             self.competition_config_dict[configuration_name] = Configuration()
-            self.competition_config_dict[configuration_name].update('server', **new_server)
+            if not self.competition_config_dict[configuration_name].server_check(**new_server):
+                response = QMessageBox().question(self, "Server Already Initialized",
+                                                  "Server may contain competition data.\nDo you want to wipe it?",
+                                                  buttons=QMessageBox.Yes | QMessageBox.No,
+                                                  defaultButton=QMessageBox.No)
+                if response == QMessageBox.Yes:
+                    self.competition_config_dict[configuration_name].server_wipe()
+                if response == QMessageBox.No:
+                    response = QMessageBox().question(self, "Server Already Initialized",
+                                                      "Would you like to synchronize the local configuration with the server?",
+                                                      buttons=QMessageBox.Yes | QMessageBox.No,
+                                                      defaultButton=QMessageBox.No)
+                    if response == QMessageBox.Yes:
+                        self.competition_config_dict[configuration_name].challenge_api("sync")
+                        self.competition_config_dict[configuration_name].user_api("sync")
             self.save_configurations()
             self.competition_tree.fill(self.competition_config_dict)
         else:
@@ -295,17 +314,21 @@ class CTFi2GUI(QWidget):
             alert.setText("Competition Deletion Cancelled")
             alert.exec_()
 
+    def server_reset(self):
+        self.log("Server Reset Called.")
+        root_node = self.competition_tree.find_root_node(self.server_context_menu.selected_item)
+        self.competition_config_dict[root_node].server_reset()
+
+    def server_wipe(self):
+        self.log("Sync Challenge Called.")
+        root_node = self.competition_tree.find_root_node(self.server_context_menu.selected_item)
+        self.competition_config_dict[root_node].server_wipe()
+
     def challenge_sync(self):
         self.log("Sync Challenge Called.")
         root_node = self.competition_tree.find_root_node(self.challenge_root_context_menu.selected_item)
         self.competition_config_dict[root_node].challenge_api("sync")
         self.competition_tree.fill(self.competition_config_dict)
-
-    def import_competition(self):
-        pass
-
-    def export_competition(self):
-        pass
 
     def add_challenge(self) -> None:
         self.log("Add Challenge Called.")

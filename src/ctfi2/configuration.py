@@ -86,11 +86,6 @@ class Configuration:
             raise Exception("{}: Expected one of the following: {}".format(obj, list(dat.keys())))
 
         if obj == 'server':
-            # Compound if used to trigger a check to either initialize, wipe or reset the CTFd server instance
-            if kwargs['url_prefix'] != self.configuration['server']['url_prefix'] or \
-                kwargs['name'] != self.configuration['server']['name'] or \
-                    kwargs['password'] != self.configuration['server']['password']:
-                self.server_check()
             self.configuration[obj].update(kwargs)
         else:
             obj_index: int = next((self.configuration[obj].index(item) for item in self.configuration[obj]
@@ -200,7 +195,8 @@ class Configuration:
                     # Match local object IDs to remote object IDs
                     for remote_obj in objs_remote:
                         # Update objects that use the name field
-                        if ('id' in remote_obj.keys() and remote_obj['id'] == local_obj['id']) and ('name' in remote_obj.keys() and remote_obj['name'] == local_obj['name']):
+                        if ('id' in remote_obj.keys() and remote_obj['id'] == local_obj['id']) and (
+                                'name' in remote_obj.keys() and remote_obj['name'] == local_obj['name']):
                             local_obj.update({'id': remote_obj['id']})
                             local_obj = actions[obj]['update'](**local_obj)
                             self.update(obj, **local_obj)
@@ -307,18 +303,41 @@ class Configuration:
     def user_api(self, action: str, obj: dict = None) -> None:
         self._api_alterConfig(action=action, obj='users', obj_item=obj)
 
-    def server_check(self) -> None:
+    def server_check(self, **kwargs) -> bool:
         """Checks if server live and if it needs initialized, wiped or reset"""
+        # TODO: The return behavior is crushingly trivial and provides terrible coverage but ... /shrug for now
+        COMPLETE = True
+        PROMPT_WIPE = False
+        self.configuration['server'].update(kwargs)
+        self.api_session = API(prefix_url=kwargs['url_prefix'])
+        # If uninitialized go ahead and do it
+        if "setup" in self.api_session.get('/').url:
+            data: dict = {key: value for key, value in self.configuration['server'].items() if key != 'url_prefix'}
+            self.api_session.server_init(data)
+            return COMPLETE
+        elif "{}/".format(kwargs['url_prefix']) == self.api_session.get('/').url:
+            return PROMPT_WIPE
 
-
-    def server_init(self) -> None:
-        """Initializes a brand new, wiped, or reset CTFd server"""
-        pass
-
-    def server_wipe(self) -> (bool, str):
+    def server_wipe(self) -> bool:
         """Wipes the server: Deletes all users, challenges, challenge files, hints, flags, and statistics"""
-        pass
+        if self._api_isAuthenticated():
+            data: dict = {"accounts": "y",
+                          "submissions": "y",
+                          "challenges": "y",
+                          "pages": "y",
+                          "notifications": "y"}
+            if self.api_session.server_reset(data):
+                data: dict = {key: value for key, value in self.configuration['server'].items() if key != 'url_prefix'}
+                return self.api_session.server_init(data)
+        return False
 
-    def server_reset(self) -> (bool, str):
+    def server_reset(self) -> bool:
         """Resets the server: Deletes all users and statistics"""
-        pass
+        if self._api_isAuthenticated():
+            data: dict = {"accounts": "y",
+                          "submissions": "y",
+                          "notifications": "y"}
+            if self.api_session.server_reset(data):
+                data: dict = {key: value for key, value in self.configuration['server'].items() if key != 'url_prefix'}
+                return self.api_session.server_init(data)
+        return False

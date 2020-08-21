@@ -6,7 +6,7 @@ from simplejson.errors import JSONDecodeError
 
 TITLE = 'CTFi2'
 AUTHOR = 'George'
-VERSION = '1.0 (Acceptable Axolotl)'
+VERSION = '1.5 (Acceptable Axolotl)'
 
 pattern_email = r"[a-zA-Z0-9_-]*@[a-zA-Z0-9]*\.[a-zA-Z]{2,3}"
 pattern_hash = r'.*,(\"\$bcrypt.*\"),.*'

@@ -18,6 +18,10 @@ Key Features:
 * Manage multiple CTFd instances simultaneously
 
 ### Change Log
+- Version 1.5 (Acceptable Axolotl)
+    - New Server Level Functionality: Initialize, Reset and Wipe CTFd Instances!
+    - New "Documentation"
+    
 - Version 1.0 (Acceptable Axolotl)
     - Initial Release
 

@@ -49,16 +49,11 @@ class API(Session):
 
         return True if "{}/".format(self.prefix_url) == self.post(page, data=data).url else False
 
-    def server_reset(self) -> bool:
+    def server_reset(self, data: dict) -> bool:
         """Wipes the server of all data: Users, Subissions, Challenges, Pages and Notifications."""
         page = "admin/reset"
         head = {"Content-Type": "application/x-www-form-urlencoded"}
-        data = {"accounts": "y",
-                "submissions": "y",
-                "challenges": "y",
-                "pages": "y",
-                "notifications": "y",
-                "nonce": self._get_nonce()}
+        data.update({"nonce": self._get_nonce()})
         return True if 'setup' in self.post(page, data=data, headers=head).url else False
 
     ##
