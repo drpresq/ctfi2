@@ -20,7 +20,7 @@ Key Features:
 ### Change Log
 - Version 1.5 (Acceptable Axolotl)
     - **New** Server Level Functionality: Initialize, Reset and Wipe CTFd Instances!
-    - **New** "Documentation" under docs/
+    - **New** ["Documentation"](docs/main.md)
     - **Update** Readme
     - **Update** Squished a bug in the file handler that saved challenge files to funky paths
     
