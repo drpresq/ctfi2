@@ -46,7 +46,8 @@ class API(Session):
             ctf_name, ctf_description, user_mode, name, email and password"""
         page = "setup"
         data.update({"nonce": self._get_nonce(page)})
-        return True if 'challenge' in self.post(page, data=data).url else False
+
+        return True if "{}/".format(self.prefix_url) == self.post(page, data=data).url else False
 
     def server_reset(self) -> bool:
         """Wipes the server of all data: Users, Subissions, Challenges, Pages and Notifications."""
