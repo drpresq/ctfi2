@@ -437,7 +437,7 @@ class CTFi2GUI(QWidget):
         new_file: dict = self.new_file_dialog.read()
         new_file.update({'challenge': challenge_id, 'type': 'challenge', 'challenge_id': challenge_id})
 
-        folder_path = "{}{}".format(FILE_PATH, [item['name']
+        folder_path = "{}/{}".format(FILE_PATH, [item['name']
                                                 for item in
                                                 self.competition_config_dict[root_node].configuration['challenges']
                                                 if item['id'] == challenge_id][0])

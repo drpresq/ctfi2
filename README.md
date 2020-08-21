@@ -1,6 +1,6 @@
 # CTFd Interface 2 (ctfi2)
 ## Table of Contents
-- [CTFd Command Line Interface 2 (ctfcli2)](#CTFd-Command-Line-Interface-2-ctfcli2)
+- [CTFd Interface 2 (ctfi2)](#CTFd-Interface-2-ctfi2)
     - [Description](#description)
     - [Change Log](#change-log)
     - [Limitations](#limitations)
@@ -13,26 +13,28 @@ ctfi2 is a management tool for [CTFd](https://github.com/CTFd/CTFd) Server insta
 
 Key Features:
 * Handsome Graphical User Interface!
-* Granular control of your Challenges and Users
-* At-a-glance view of all Challenges
-* Manage multiple CTFd instances simultaneously
+* Add and Remove configuration objects (Users, Challenges, Flags, Hints, Files) in real time.
+* Import Users from CSV or bulk create generic ones.
+* Manage multiple _independent_ CTFd instances simultaneously
 
 ### Change Log
 - Version 1.5 (Acceptable Axolotl)
-    - New Server Level Functionality: Initialize, Reset and Wipe CTFd Instances!
-    - New "Documentation"
+    - **New** Server Level Functionality: Initialize, Reset and Wipe CTFd Instances!
+    - **New** "Documentation" under docs/
+    - **Update** Readme
+    - **Update** Squished a bug in the file handler that saved challenge files to funky paths
     
 - Version 1.0 (Acceptable Axolotl)
     - Initial Release
 
 - TODO:
-    - Documentation
-    - Reduce the volume of tastey spaghetti!
-    - Inuitive, msfconsole-esq, Command Line Mode
-    - Import/Export of configuration data
+    - [X] Documentation
+    - [X] Reduce the volume of tastey spaghetti!
+    - [ ] Inuitive, msfconsole-esq, Command Line Mode
+    - [ ] Import/Export of configuration data
 
 ### Limitations
-* The system is unable to init, reset or wipe an existsing CTFd instance at this time.
+* ~~The system is unable to init, reset or wipe an existsing CTFd instance at this time.~~ (Fixed as of v1.5)
 
 ### Installation
 ctfi2 has been tested on:
@@ -40,7 +42,7 @@ ctfi2 has been tested on:
 * Debian Buster
 
 ##### Requirements
-* [Python >= 3.6 (64-bit) ](https://www.python.org/downloads/release/python-360/)
+* [Python >= 3.6 (64-bit)](https://www.python.org/downloads/release/python-360/)
 * [Requests >= 2.22.0](https://requests.readthedocs.io/en/master/)
 * [PyQt5 >= 5.9.2](https://pypi.org/project/PyQt5/)
 
@@ -58,12 +60,6 @@ pip3 install ./ctfi2
 Run it!:
 ```
 ctfi2
-```
-
-(Optional) Run it without installation:
-```
-chmod +x ./ctfi2/scripts/ctfi2
-./ctfi2/scripts/ctfi2
 ```
 
 
