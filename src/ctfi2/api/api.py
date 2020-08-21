@@ -40,19 +40,25 @@ class API(Session):
 
     # Server Initialize and Reset Functions
 
-    def server_init(self, data: dict) -> Response:
-        # TODO: Test and refactor; change to return type bool
+    def server_init(self, data: dict) -> bool:
+        """Initializes the server using the provided data.
+        Minimum data fields are:
+            ctf_name, ctf_description, user_mode, name, email and password"""
         page = "setup"
         data.update({"nonce": self._get_nonce(page)})
-        return self.post(page, data=data)
+        return True if 'challenge' in self.post(page, data=data).url else False
 
-    def server_reset(self, name, password) -> Response:
-        # TODO: Test and refactor; change to return type bool
+    def server_reset(self) -> bool:
+        """Wipes the server of all data: Users, Subissions, Challenges, Pages and Notifications."""
         page = "admin/reset"
         head = {"Content-Type": "application/x-www-form-urlencoded"}
-        self.login(name, password)
-        data = {"nonce": self._get_nonce()}
-        return self.post(page, data=data, headers=head)
+        data = {"accounts": "y",
+                "submissions": "y",
+                "challenges": "y",
+                "pages": "y",
+                "notifications": "y",
+                "nonce": self._get_nonce()}
+        return True if 'setup' in self.post(page, data=data, headers=head).url else False
 
     ##
     #   Private Server Interaction Functions
@@ -289,4 +295,3 @@ class API(Session):
         if 'path' in kwargs and os.path.exists(kwargs['path']):
             os.system('/bin/rm -rf {}'.format(kwargs['path']))
         return self._delete_obj('files', **kwargs)
-

@@ -249,7 +249,7 @@ class CTFi2GUI(QWidget):
             self.new_server_dialog.exec_()
             new_server = self.new_server_dialog.read() if success else None
 
-        if success and new_server['url_prefix'] != '':
+        if success and new_server:
             self.competition_config_dict[configuration_name] = Configuration()
             self.competition_config_dict[configuration_name].update('server', **new_server)
             self.save_configurations()

@@ -10,8 +10,7 @@ class Configuration:
     # Default Challenge Configuration
     configuration: dict = {"server": {'url_prefix': "http://localhost:8000",
                                       'ctf_name': "CTFd",
-                                      'ctf_description': "This Competition was generated with the RES "
-                                                         "CTFd Plugin",
+                                      'ctf_description': "This Competition was generated with the CTFi2!",
                                       'user_mode': "users",
                                       'name': "root",
                                       'email': "root@ctfd.io",
@@ -87,6 +86,11 @@ class Configuration:
             raise Exception("{}: Expected one of the following: {}".format(obj, list(dat.keys())))
 
         if obj == 'server':
+            # Compound if used to trigger a check to either initialize, wipe or reset the CTFd server instance
+            if kwargs['url_prefix'] != self.configuration['server']['url_prefix'] or \
+                kwargs['name'] != self.configuration['server']['name'] or \
+                    kwargs['password'] != self.configuration['server']['password']:
+                self.server_check()
             self.configuration[obj].update(kwargs)
         else:
             obj_index: int = next((self.configuration[obj].index(item) for item in self.configuration[obj]
@@ -302,6 +306,10 @@ class Configuration:
 
     def user_api(self, action: str, obj: dict = None) -> None:
         self._api_alterConfig(action=action, obj='users', obj_item=obj)
+
+    def server_check(self) -> None:
+        """Checks if server live and if it needs initialized, wiped or reset"""
+
 
     def server_init(self) -> None:
         """Initializes a brand new, wiped, or reset CTFd server"""
