@@ -6,7 +6,8 @@
     - [Limitations](#limitations)
     - [Installation](#installation)
         - [Requirements](#requirements)
-        - [Linux](#linux)
+        - [Cross-platform From PIP](#cross-platform-from-pip)
+	- [Linux From Source](#linux-from-source)
 
 ### Description
 ctfi2 is a management tool for [CTFd](https://github.com/CTFd/CTFd) Server instance(s).
@@ -18,6 +19,10 @@ Key Features:
 * Manage multiple _independent_ CTFd instances simultaneously
 
 ### Change Log
+- Version 1.5.1 (Acceptable Axolotl)
+    - **New** Published package to pypi.org for easy pip installation
+    - **Update** README.md
+
 - Version 1.5 (Acceptable Axolotl)
     - **New** Server Level Functionality: Initialize, Reset and Wipe CTFd Instances!
     - **New** ["Documentation"](docs/main.md)
@@ -46,7 +51,13 @@ ctfi2 has been tested on:
 * [Requests >= 2.22.0](https://requests.readthedocs.io/en/master/)
 * [PyQt5 >= 5.9.2](https://pypi.org/project/PyQt5/)
 
-##### Linux
+##### Cross-Platform From PIP
+
+```
+pip3 install ctfi2
+```
+
+##### Linux From Source
 Clone the repo 
 ```  
 git clone https://github.com/drpresq/ctfcli2
