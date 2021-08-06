@@ -19,7 +19,7 @@ Key Features:
 * Manage multiple _independent_ CTFd instances simultaneously
 
 ### Change Log
-- Version 1.5.1 (Acceptable Axolotl)
+- Version 1.5.4 (Acceptable Axolotl)
     - **New** Published package to pypi.org for easy pip installation
     - **Update** README.md
 
